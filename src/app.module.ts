@@ -10,7 +10,24 @@ import { AdminModule } from './admin/admin.module';
 import { DogsModule } from './dogs/dogs.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), CatsModule, AdminModule, DogsModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'username',
+      password: 'password',
+      database: 'database',
+      synchronize: true,
+      logging: true,
+      entities: [],
+      subscribers: [],
+      migrations: [],
+    }),
+    CatsModule,
+    AdminModule,
+    DogsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
