@@ -8,6 +8,8 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { AdminModule } from './admin/admin.module';
 import { DogsModule } from './dogs/dogs.module';
+import { PeopleModule } from './people/people.module';
+import { Person } from './entity/person.entity';
 
 @Module({
   imports: [
@@ -20,10 +22,11 @@ import { DogsModule } from './dogs/dogs.module';
       database: 'database',
       synchronize: true,
       logging: true,
-      entities: [],
+      entities: [Person],
       subscribers: [],
       migrations: [],
     }),
+    PeopleModule,
     CatsModule,
     AdminModule,
     DogsModule,
