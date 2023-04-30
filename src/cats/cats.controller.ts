@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Header,
@@ -9,9 +10,13 @@ import {
   Redirect,
 } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
+import { CatsService } from './cats.service';
+import { CreateCatDto } from './create-cat.dto';
 
 @Controller('cats')
 export class CatsController {
+  constructor(private catsService: CatsService) {}
+
   @Post('httpcode')
   @Header('Cache-Control', 'none') // add custom response header
   @HttpCode(204) // specify custom response code
@@ -24,9 +29,10 @@ export class CatsController {
     return 'this route uses a wildcard';
   }
 
-  @Post()
-  addNewCat(): string {
-    return 'This action adds a new cat';
+  @Post('add')
+  async addNewCat(@Body() createCatDto: CreateCatDto) {
+    // return 'This action adds a new cat';
+    return this.catsService.addCat(createCatDto);
   }
 
   @Get()
@@ -44,7 +50,8 @@ export class CatsController {
 
   @Get('promise')
   async getPromise(): Promise<any[]> {
-    return [];
+    // return [];
+    return this.catsService.findCats();
   }
 
   @Get('observable')

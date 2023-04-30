@@ -10,7 +10,7 @@
 // additional possibilities when they have access to the metatype
 // of the variable at runtime.
 
-export class CreateCateDto {
+export class CreateCatDto {
   name: string;
   age: number;
   breed: string;

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { CreateCateDto } from 'src/cats/create-cat.dto';
+import { CreateCatDto } from 'src/cats/create-cat.dto';
 
 @Controller('dogs')
 export class DogsController {
@@ -9,7 +9,7 @@ export class DogsController {
   }
 
   @Post()
-  create(@Body() createCatDto: CreateCateDto) {
+  create(@Body() createCatDto: CreateCatDto) {
     return 'this action adds a new dog';
   }
 }
