@@ -22,4 +22,19 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off'
   },
+  overrides: [
+    {
+      files: ["*.ts"],
+      rules: {
+        'space-before-function-paren': [
+          'error',
+          {
+            anonymous: 'always',
+            named: 'always',
+            asyncArrow: 'always'
+          }
+        ]
+      }
+    }
+  ]
 };
