@@ -42,7 +42,7 @@ export class CatsController {
 
   @Get('nestjs')
   @Redirect('https://docs.nestjs.com', 302)
-  getDocs(@Query('version') version) {
+  getDocs(@Query('version') version: string): any {
     if (version && version === '5') {
       return { url: 'https://docs.nestjs.com/v5/' }; // dynamic url return pass an object with {url: string, statusCode: number}
     }
