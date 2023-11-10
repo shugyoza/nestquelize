@@ -12,7 +12,7 @@ import {
   Length,
 } from 'sequelize-typescript';
 
-import { limit } from 'src/shared/constants';
+import { length } from 'src/shared/constants';
 
 enum UserRole {
   OWNER = 'owner',
@@ -43,20 +43,20 @@ export class User extends Model {
   @AllowNull(false)
   @Unique(true)
   @Length({
-    min: limit.length.email.min,
-    max: limit.length.email.max,
+    min: length.email.min,
+    max: length.email.max,
   })
   @Column(DataType.STRING)
   email: string;
 
   @AllowNull(false)
   @Unique(true)
-  @Length({ min: 3, max: limit.length.max })
+  @Length({ min: 3, max: length.max })
   @Column(DataType.STRING)
   username: string;
 
   @AllowNull(false)
-  @Length({ min: 8 })
+  @Length({ min: length.password.min })
   @Column(DataType.STRING)
   password: string;
 
