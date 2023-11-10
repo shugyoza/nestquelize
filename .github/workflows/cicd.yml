@@ -10,7 +10,7 @@ env:
   # if it is a main, release, or development branch, we want to create and push docker image
   # DOCKERIZE: ${{ endsWith(github.ref, '/main') || endsWith(github.ref, '/release') || endsWith(github.ref, '/development') }}
   # DOCKERIZE: ${{ (github.ref == 'refs/heads/main') || (github.ref == 'refs/heads/release') || (github.ref == 'refs/heads/development') }}
-  DOCKERIZE: endsWith(github.ref, '/main') # temporarily I let's just create docker image only for main build
+  DOCKERIZE: 'false' # endsWith(github.ref, '/main') # temporarily I let's just create docker image only for main build
   VERSION_TAGGED: ${{ contains(github.event.ref, '/tags/v') }}
 
 jobs:
@@ -53,7 +53,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # below is for customizing lint rules
           LINTER_RULES_PATH: /
-          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
+          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.js
           VALIDATE_JAVASCRIPT_STANDARD: false
           # TYPESCRIPT_DEFAULT_STYLE: prettier # ts-standard # default is ts-standard
           # disabled for throwing trivial or non-sensical errors
@@ -64,7 +64,7 @@ jobs:
       # - run: npm run build --if-present
 
       - name: Running unit tests
-        run: npm run ci:test
+        run: npm run test:cov
 
       - name: Running ng lint
         run: npm run lint
