@@ -5,9 +5,18 @@ export class Person {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    length: 50,
+  })
   firstName: string;
 
-  @Column()
+  @Column({
+    length: 50,
+  })
   lastName: string;
+
+  @Column({
+    length: 50,
+  })
+  email: string;
 }

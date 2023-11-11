@@ -1,39 +1,25 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
+import { ConfigModule } from '@nestjs/config';
 
-import { AppDataSource } from './data-source';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CatsModule } from './cats/cats.module';
-import { AdminModule } from './admin/admin.module';
-import { DogsModule } from './dogs/dogs.module';
 import { PeopleModule } from './people/people.module';
-import { Person } from './entity/person.entity';
+import { UsersModule } from './users/users.module';
+import { DbModule } from './core/db/db.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'username',
-      password: 'password',
-      database: 'database',
-      synchronize: true,
-      logging: true,
-      entities: [Person],
-      subscribers: [],
-      migrations: [],
+    ConfigModule.forRoot({
+      isGlobal: true, // so that no need to import to other module that needs ConfigModule
+      ignoreEnvFile: false,
+      envFilePath: ['.env'], // can take multiple .env paths although by default, if undefined, looks for .env
+      // load: [dbConfig, authConfig, whateverConfig],
     }),
+    UsersModule,
+    DbModule,
     PeopleModule,
-    CatsModule,
-    AdminModule,
-    DogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) {}
-}
+export class AppModule {}

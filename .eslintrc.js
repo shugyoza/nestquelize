@@ -22,4 +22,32 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
   },
+  overrides: [
+    {
+      files: ['*.ts'],
+      rules: {
+        'space-before-function-paren': [
+          'error',
+          {
+            anonymous: 'never',
+            named: 'never',
+            asyncArrow: 'always',
+          },
+        ],
+        'comma-dangle': [
+          'error',
+          {
+            arrays: 'always-multiline',
+            objects: 'always-multiline',
+            imports: 'always-multiline',
+            exports: 'always-multiline',
+            functions: 'only-multiline',
+          },
+        ],
+        'array-bracket-spacing': ['error', 'never'],
+        'object-curly-spacing': ['error', 'always'],
+        'computed-property-spacing': ['error', 'always'],
+      },
+    },
+  ],
 };
