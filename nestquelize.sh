@@ -28,3 +28,6 @@ npm i --save @nestjs/sequelize sequelize-typescript
 
 #installing sequelize type
 npm i --save-dev @types/sequelize
+
+# going to need this for sequelize migration
+npm i --save sequelize sequelize-cli
