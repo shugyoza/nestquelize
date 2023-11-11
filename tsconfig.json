@@ -19,6 +19,6 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedParameters": true,
-    "strictFunctionTypes": true,
+    "strictFunctionTypes": true
   }
 }
