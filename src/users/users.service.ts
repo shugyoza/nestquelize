@@ -13,7 +13,7 @@ Ref.: https://stackoverflow.com/questions/36446480/typescript-decorator-reports-
 export class UsersService {
   constructor(
     @Inject('USERS_REPOSITORY')
-    private userModel: typeof User,
+    private userModel: typeof User
   ) {}
 
   async findAll(): Promise<User[]> {
