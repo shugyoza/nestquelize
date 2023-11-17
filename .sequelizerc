@@ -1,0 +1,12 @@
+const { resolve } = require('path');
+
+module.exports = {
+  'seeders-path': resolve('src/core/db', 'seeders'),
+  'migrations-path': resolve('src/core/db', 'migrations'),
+  config: resolve('src/core/db/config', 'config.ts'),
+  'models-path': resolve('dist/core/db/models'),
+};
+
+// need sequelize-cli v. 6.3.0, to have config path resolved to .ts file
+// else sequelize-cli does not recognize .ts format, only .js, .json, .cjs or .mjs
+// ref.: https://github.com/sequelize/cli/issues/1099
