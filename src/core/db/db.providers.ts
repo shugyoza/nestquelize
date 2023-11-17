@@ -27,7 +27,12 @@ export const dbProviders = [
         port: process.env.DB_PORT || 5432,
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
+        database:
+          process.env.NODE_ENV === 'development'
+            ? process.env.DB_DEV_NAME
+            : process.env.NODE_ENV === 'test'
+            ? process.env.DB_TEST_NAME
+            : process.env.DB_PROD_NAME,
         models: [],
         logging: true,
       };
