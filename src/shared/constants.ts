@@ -20,3 +20,14 @@ export const length = {
   },
   max: 255, // in bytes which roughly equals to 255 chars without a good text compression algorithm.
 };
+
+export enum ProvideToken {
+  SEQUELIZE = 'SEQUELIZE',
+  ACCOUNTS_REPOSITORY = 'ACCOUNTS_REPOSITORY',
+}
+
+export enum NodeEnv {
+  DEVELOPMENT = 'development',
+  TEST = 'test',
+  PRODUCTION = 'production',
+}
