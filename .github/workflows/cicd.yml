@@ -55,7 +55,7 @@ jobs:
           LINTER_RULES_PATH: /
           JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.js
           VALIDATE_JAVASCRIPT_STANDARD: false
-          # TYPESCRIPT_DEFAULT_STYLE: prettier # ts-standard # default is ts-standard
+          TYPESCRIPT_DEFAULT_STYLE: prettier # ts-standard # default is ts-standard
           # disabled for throwing trivial or non-sensical errors
           VALIDATE_HTML: false # err on .component.html, e.g: must include DOC=HTML at the start of every .html
           VALIDATE_POWERSHELL: false # error on .sh, i.e.: 'error  Parsing error: Unexpected token :'
