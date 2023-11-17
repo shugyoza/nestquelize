@@ -46,7 +46,7 @@ module.exports = {
         ],
         'array-bracket-spacing': ['error', 'never'],
         'object-curly-spacing': ['error', 'always'],
-        'computed-property-spacing': ['error', 'always'],
+        'computed-property-spacing': ['error', 'never'], // eslint deprecated
       },
     },
   ],
