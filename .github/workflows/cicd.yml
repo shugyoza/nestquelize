@@ -46,7 +46,7 @@ jobs:
       # Adjust the behavior by modifying env vars, list see: https://github.com/super-linter/super-linter
       # or add customized files in .github/linters/ directory, list see: https://github.com/github/super-linter/blob/main/TEMPLATES/
       - name: Lint Code Base
-        uses: super-linter/super-linter:slim-v5 # github/super-linter@v4
+        uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: 'main'
@@ -57,6 +57,7 @@ jobs:
           VALIDATE_JAVASCRIPT_STANDARD: false
           TYPESCRIPT_DEFAULT_STYLE: prettier # ts-standard # default is ts-standard
           # disabled for throwing trivial or non-sensical errors
+          VALIDATE_ENV: false # dotenv linter enforcing key-value pair to be in order. We want to group them by function/feature
           VALIDATE_HTML: false # err on .component.html, e.g: must include DOC=HTML at the start of every .html
           VALIDATE_POWERSHELL: false # error on .sh, i.e.: 'error  Parsing error: Unexpected token :'
           VALIDATE_SHELL_SHFMT: false # err on .sh, strict non-sense as there is no hint about what is wrong.
