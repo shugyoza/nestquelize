@@ -46,7 +46,7 @@ jobs:
       # Adjust the behavior by modifying env vars, list see: https://github.com/super-linter/super-linter
       # or add customized files in .github/linters/ directory, list see: https://github.com/github/super-linter/blob/main/TEMPLATES/
       - name: Lint Code Base
-        uses: github/super-linter@v4
+        uses: super-linter/super-linter:slim-v5 # github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: 'main'
