@@ -3,12 +3,12 @@ import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { AccountEntity } from './account.entity';
 
-@Controller()
+@Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Get()
-  async findAll() {
+  async findAll(): Promise<AccountEntity[]> {
     return await this.accountsService.findAll();
   }
 
