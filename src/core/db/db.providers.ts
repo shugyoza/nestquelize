@@ -1,9 +1,10 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import { User } from 'src/users/user.entity';
+import { AccountEntity } from 'src/account/account.entity';
+import { ProvideToken } from 'src/shared/constants';
 
 const tables = [
-  User,
+  AccountEntity,
   // add additional models here
 ];
 
@@ -18,7 +19,7 @@ async function initSequelize(config: any, models: any[]) {
 
 export const dbProviders = [
   {
-    provide: 'SEQUELIZE',
+    provide: ProvideToken.SEQUELIZE,
     useFactory: () => {
       // when taken out, these 'process.env' did not pull from .env
       const config = {
