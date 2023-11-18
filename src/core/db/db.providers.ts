@@ -8,7 +8,6 @@ const tables = [
   // add additional models here
 ];
 
-// pure function to initialize sequelize with any db config?
 async function initSequelize(config: any, models: any[]) {
   const sequelize = new Sequelize(config);
   sequelize.addModels(models);
@@ -21,7 +20,6 @@ export const dbProviders = [
   {
     provide: ProvideToken.SEQUELIZE,
     useFactory: () => {
-      // when taken out, these 'process.env' did not pull from .env
       const config = {
         dialect: process.env.DB_DIALECT,
         host: process.env.DB_HOST,
