@@ -3,7 +3,7 @@ const { resolve } = require('path');
 module.exports = {
   'seeders-path': resolve('src/core/db', 'seeders'),
   'migrations-path': resolve('src/core/db', 'migrations'),
-  config: resolve('src/core/db/config', 'config.ts'),
+  config: resolve('src/core/db/config', 'db.config.ts'),
   'models-path': resolve('dist/core/db/models'),
 };
 
