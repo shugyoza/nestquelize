@@ -1,13 +1,13 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import { User } from 'src/users/user.entity';
+import { AccountEntity } from 'src/account/account.entity';
+import { ProvideToken } from 'src/shared/constants';
 
 const tables = [
-  User,
+  AccountEntity,
   // add additional models here
 ];
 
-// pure function to initialize sequelize with any db config?
 async function initSequelize(config: any, models: any[]) {
   const sequelize = new Sequelize(config);
   sequelize.addModels(models);
@@ -18,9 +18,8 @@ async function initSequelize(config: any, models: any[]) {
 
 export const dbProviders = [
   {
-    provide: 'SEQUELIZE',
+    provide: ProvideToken.SEQUELIZE,
     useFactory: () => {
-      // when taken out, these 'process.env' did not pull from .env
       const config = {
         dialect: process.env.DB_DIALECT,
         host: process.env.DB_HOST,

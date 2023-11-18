@@ -3,8 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PeopleModule } from './people/people.module';
-import { UsersModule } from './users/users.module';
+import { AccountsModule } from './account/accounts.module';
 import { DbModule } from './core/db/db.module';
 
 @Module({
@@ -15,9 +14,8 @@ import { DbModule } from './core/db/db.module';
       envFilePath: ['.env'], // can take multiple .env paths although by default, if undefined, looks for .env
       // load: [dbConfig, authConfig, whateverConfig],
     }),
-    UsersModule,
+    AccountsModule,
     DbModule,
-    PeopleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

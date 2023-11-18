@@ -65,6 +65,17 @@ jobs:
       # - run: npm run build --if-present
 
       - name: Running unit tests
+        env:
+          NODE_ENV: 'test'
+          PORT: 3000
+          DB_DIALECT: 'postgres'
+          DB_HOST: 'localhost'
+          DB_PORT: 5432
+          DB_USERNAME: 'username'
+          DB_PASSWORD: ''
+          DB_PROD_NAME: 'database'
+          DB_TEST_NAME: 'database'
+          DB_DEV_NAME: 'database'
         run: npm run test:cov
 
       - name: Running ng lint
