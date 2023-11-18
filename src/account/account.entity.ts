@@ -1,10 +1,4 @@
-import {
-  Column,
-  Model,
-  Table,
-  CreatedAt,
-  UpdatedAt,
-} from 'sequelize-typescript';
+import { Column, Model, Table } from 'sequelize-typescript';
 
 import {
   attributes,
@@ -27,9 +21,9 @@ export class AccountEntity extends Model<AccountInstance> {
   @Column({ ...attributes.role })
   role: AccountRole;
 
-  @CreatedAt
+  @Column({ ...attributes.createdAt })
   createdAt: Date;
 
-  @UpdatedAt
+  @Column({ ...attributes.updatedAt })
   updatedAt: Date;
 }

@@ -5,8 +5,8 @@ import {
   Get,
   NotFoundException,
   Param,
+  Patch,
   Post,
-  Put,
 } from '@nestjs/common';
 
 import { AccountsService } from './accounts.service';
@@ -23,8 +23,8 @@ export class AccountsController {
   }
 
   @Post('add')
-  async addOne(@Body() account: AccountDto) {
-    return await this.accountsService.create(account);
+  async addOne(@Body() input: AccountDto) {
+    return await this.accountsService.create(input);
   }
 
   @Get(':id')
@@ -51,7 +51,7 @@ export class AccountsController {
     return account;
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body() accountUpdate: AccountDto
