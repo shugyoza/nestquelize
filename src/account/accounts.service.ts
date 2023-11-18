@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 
-import { ProvideToken } from 'src/shared/constants';
+import { ProvideToken } from '../shared/constants';
 
 import { AccountEntity } from './account.entity';
 import { AccountDto } from './dto/account.dto';
@@ -8,20 +8,20 @@ import { AccountDto } from './dto/account.dto';
 @Injectable()
 export class AccountsService {
   constructor(
-    @Inject(ProvideToken.ACCOUNTS_REPOSITORY) // @Inject('ACCOUNTS_REPOSITORY')
-    private readonly account: typeof AccountEntity
+    @Inject(ProvideToken.ACCOUNTS_REPOSITORY)
+    private readonly accountRepository: typeof AccountEntity
   ) {}
 
   async create(account: AccountDto): Promise<AccountEntity> {
-    return await this.account.create<AccountEntity>(account);
+    return await this.accountRepository.create<AccountEntity>(account);
   }
 
   async findAll(): Promise<AccountEntity[]> {
-    return this.account.findAll();
+    return await this.accountRepository.findAll();
   }
 
   async findOneById(id: number): Promise<AccountEntity | null> {
-    return await this.account.findOne<AccountEntity>({
+    return await this.accountRepository.findOne<AccountEntity>({
       where: {
         id,
       },
@@ -29,15 +29,27 @@ export class AccountsService {
   }
 
   async findOneByUsername(username: string): Promise<AccountEntity | null> {
-    return await this.account.findOne<AccountEntity>({
+    return await this.accountRepository.findOne<AccountEntity>({
       where: {
         username,
       },
     });
   }
 
-  async remove(id: number): Promise<void> {
-    const account = await this.findOneById(id);
-    await account?.destroy();
+  async update(
+    id: number,
+    updates: { [key: string]: any }
+  ): Promise<{ affectedCount: number; updatedAccount: AccountEntity }> {
+    const [affectedCount, [updatedAccount]] =
+      await this.accountRepository.update(
+        { ...updates },
+        { where: { id }, returning: true }
+      );
+
+    return { affectedCount, updatedAccount };
+  }
+
+  async delete(id: number) {
+    return await this.accountRepository.destroy({ where: { id } });
   }
 }

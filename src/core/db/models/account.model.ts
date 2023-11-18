@@ -16,7 +16,7 @@ const roles = [
   AccountRole.USER,
 ];
 
-interface AccountModel {
+interface AccountAttributes {
   id: number;
   username: string;
   password: string;
@@ -26,11 +26,11 @@ interface AccountModel {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AccountCreationAttributes
   // means this property can be undefined at the time of document creation
-  extends Optional<AccountModel, 'id'> {}
+  extends Optional<AccountAttributes, 'id'> {}
 
 export interface AccountInstance
-  extends Model<AccountModel, AccountCreationAttributes>,
-    AccountModel {
+  extends Model<AccountAttributes, AccountCreationAttributes>,
+    AccountAttributes {
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -40,7 +40,7 @@ export const tableName = 'Accounts';
 export const attributes = {
   id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
     unique: true,
     primaryKey: true,
     autoIncrement: true,
@@ -57,6 +57,14 @@ export const attributes = {
   role: {
     type: DataTypes.ENUM(...roles),
     defaultValue: AccountRole.USER,
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
   },
 };
 

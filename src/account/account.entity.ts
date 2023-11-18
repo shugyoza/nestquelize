@@ -2,7 +2,6 @@ import {
   Column,
   Model,
   Table,
-  BelongsTo,
   CreatedAt,
   UpdatedAt,
 } from 'sequelize-typescript';
@@ -12,7 +11,7 @@ import {
   tableName,
   AccountRole,
   AccountInstance,
-} from 'src/core/db/models/account.model';
+} from '../core/db/models/account.model';
 
 @Table({ tableName })
 export class AccountEntity extends Model<AccountInstance> {
