@@ -11,7 +11,7 @@ const _config = {
   password: process.env.DB_PASSWORD,
 };
 
-const config = {
+const db = {
   development: {
     ..._config,
     database: process.env.DB_DEV_NAME,
@@ -26,4 +26,4 @@ const config = {
   },
 };
 
-module.exports = config;
+module.exports = db;
