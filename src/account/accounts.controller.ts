@@ -6,7 +6,6 @@ import {
   NotFoundException,
   Param,
   Patch,
-  Post,
 } from '@nestjs/common';
 
 import { AccountsService } from './accounts.service';
@@ -20,11 +19,6 @@ export class AccountsController {
   @Get()
   async findAll(): Promise<AccountEntity[]> {
     return await this.accountsService.findAll();
-  }
-
-  @Post('add')
-  async addOne(@Body() input: AccountDto) {
-    return await this.accountsService.create(input);
   }
 
   @Get(':id')

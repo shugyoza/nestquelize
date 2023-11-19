@@ -104,30 +104,6 @@ describe('AccountsController', () => {
     });
   });
 
-  describe('addOne', () => {
-    it('should create a new account when the request body has all the valid properties', async () => {
-      const newAccount = {
-        username: 'username2',
-        password: 'password2',
-        role: AccountRole.USER,
-      };
-
-      jest
-        .spyOn(accountsService, 'create')
-        .mockImplementation((input: AccountDto): Promise<any> => {
-          return new Promise((resolve) => {
-            const newDocument = { ...input, id: 2 } as any;
-            accounts = [...accounts, newDocument];
-            return resolve(accounts);
-          });
-        });
-
-      await accountsController.addOne(newAccount as AccountDto);
-
-      expect(accountsService.create).toHaveBeenCalledWith(newAccount);
-    });
-  });
-
   describe('update', () => {
     it('should update an account when the request body provide a valid id and the updates', async () => {
       const id = account.id;
