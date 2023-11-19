@@ -941,6 +941,13 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
+"@types/bcrypt@^5.0.2":
+  "integrity" "sha512-6atioO8Y75fNcbmj0G7UjI9lXN2pQ/IGJ2FWT4a/btd0Lk9lQalHLKhkgKVZ3r+spnmWUKfbMi1GEe9wyHQfNQ=="
+  "resolved" "https://registry.npmjs.org/@types/bcrypt/-/bcrypt-5.0.2.tgz"
+  "version" "5.0.2"
+  dependencies:
+    "@types/node" "*"
+
 "@types/bluebird@*":
   "integrity" "sha512-Jhy+MWRlro6UjVi578V/4ZGNfeCOcNCp0YaFNIUGFKlImowqwb1O/22wDVk3FDGMLqxdpOV3qQHD5fPEH4hK6A=="
   "resolved" "https://registry.npmjs.org/@types/bluebird/-/bluebird-3.5.42.tgz"
