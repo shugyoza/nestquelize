@@ -1,4 +1,4 @@
-import { AccountRole } from 'src/core/db/models/account.model';
+import { AccountRole } from '../../core/db/models/account.model';
 import { AccountEntity } from '../account.entity';
 
 export class AccountDto extends AccountEntity {
