@@ -35,7 +35,7 @@ describe('AccountsService', () => {
     });
   });
 
-  describe('findAccountById', () => {
+  describe('findOneById', () => {
     it('should return an account if account with such id exists in the database', async () => {
       const account = accounts[0];
       const argument = { where: { id: account.id } };
@@ -44,14 +44,14 @@ describe('AccountsService', () => {
       });
 
       jest.spyOn(AccountEntity, 'findOne').mockReturnValue(promise);
-      const result = await accountsService.findAccountById(account.id);
+      const result = await accountsService.findOneById(account.id);
 
       expect(AccountEntity.findOne).toHaveBeenCalledWith(argument);
       expect(result).toBe(account);
     });
   });
 
-  describe('findAccountByEmail', () => {
+  describe('findOneByEmail', () => {
     it('should return an account if account with such email exists in the database', async () => {
       const account = accounts[0];
       const argument = { where: { email: account.email } };
@@ -60,14 +60,14 @@ describe('AccountsService', () => {
       });
 
       jest.spyOn(AccountEntity, 'findOne').mockReturnValue(promise);
-      const result = await accountsService.findAccountByEmail(account.email);
+      const result = await accountsService.findOneByEmail(account.email);
 
       expect(AccountEntity.findOne).toHaveBeenCalledWith(argument);
       expect(result).toBe(account);
     });
   });
 
-  describe('findAccountByUsername', () => {
+  describe('findOneByUsername', () => {
     it('should return an account if account with such username exists in the database', async () => {
       const account = accounts[0];
       const argument = { where: { username: account.username } };
@@ -76,16 +76,14 @@ describe('AccountsService', () => {
       });
 
       jest.spyOn(AccountEntity, 'findOne').mockReturnValue(promise);
-      const result = await accountsService.findAccountByUsername(
-        account.username
-      );
+      const result = await accountsService.findOneByUsername(account.username);
 
       expect(AccountEntity.findOne).toHaveBeenCalledWith(argument);
       expect(result).toBe(account);
     });
   });
 
-  describe('findAccounts', () => {
+  describe('findMany', () => {
     it('should return accounts of a given criteria if they are in the database', async () => {
       const account = accounts[0];
       const argument = { where: account };
@@ -94,7 +92,7 @@ describe('AccountsService', () => {
       });
 
       jest.spyOn(AccountEntity, 'findOne').mockReturnValue(promise);
-      const result = await accountsService['findAccounts'](argument);
+      const result = await accountsService['findMany'](argument);
 
       expect(AccountEntity.findOne).toHaveBeenCalledWith(argument);
       expect(result).toBe(account);
@@ -150,14 +148,14 @@ describe('AccountsService', () => {
     });
   });
 
-  describe('delete', () => {
+  describe('deleteOne', () => {
     it('should delete an account when the request body provide a valid id', async () => {
       const id = 1;
       jest.spyOn(AccountEntity, 'destroy').mockImplementation((where: any) => {
         return new Promise((resolve) => resolve(where));
       });
 
-      await accountsService.delete(id);
+      await accountsService.deleteOne(id);
 
       expect(AccountEntity.destroy).toHaveBeenCalledWith({ where: { id } });
     });

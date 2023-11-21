@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import { AccountsService } from '../../account/accounts.service';
+import { AccountDTO } from '../../account/interfaces/account.dto';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -14,7 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
+  async validate(payload: AccountDTO): Promise<AccountDTO> {
     const account = await this.accountsService.findOneById(payload.id);
 
     if (!account) {

@@ -26,21 +26,19 @@ export class AccountsService {
     return await this.accountRepository.findAll();
   }
 
-  public async findAccountById(id: number): Promise<AccountEntity | null> {
+  public async findOneById(id: number): Promise<AccountEntity | null> {
     return await this.accountRepository.findOne<AccountEntity>({
       where: { id },
     });
   }
 
-  public async findAccountByEmail(
-    email: string
-  ): Promise<AccountEntity | null> {
+  public async findOneByEmail(email: string): Promise<AccountEntity | null> {
     return await this.accountRepository.findOne<AccountEntity>({
       where: { email },
     });
   }
 
-  public async findAccountByUsername(
+  public async findOneByUsername(
     username: string
   ): Promise<AccountEntity | null> {
     return await this.accountRepository.findOne<AccountEntity>({
@@ -61,13 +59,11 @@ export class AccountsService {
     return { affectedCount, updatedAccount };
   }
 
-  async delete(id: number): Promise<number> {
+  async deleteOne(id: number): Promise<number> {
     return await this.accountRepository.destroy({ where: { id } });
   }
 
-  private async findAccounts(
-    where: QueryAccount
-  ): Promise<AccountEntity | null> {
+  private async findMany(where: QueryAccount): Promise<AccountEntity | null> {
     return await this.accountRepository.findOne<AccountEntity>(where);
   }
 }
