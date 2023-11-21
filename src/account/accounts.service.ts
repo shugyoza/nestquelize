@@ -1,9 +1,13 @@
 import { Injectable, Inject } from '@nestjs/common';
 
 import { ProvideToken } from '../shared/constants';
-
 import { AccountEntity } from './account.entity';
-import { AccountDto } from './dto/account.dto';
+import {
+  AccountDTO,
+  LoginDTO,
+  PartialAccountDTO,
+  QueryAccount,
+} from './interfaces/account.dto';
 
 @Injectable()
 export class AccountsService {
@@ -12,34 +16,42 @@ export class AccountsService {
     private readonly accountRepository: typeof AccountEntity
   ) {}
 
-  async create(account: AccountDto): Promise<AccountEntity> {
-    return await this.accountRepository.create<AccountEntity>(account);
+  async create(account: LoginDTO): Promise<AccountEntity> {
+    return await this.accountRepository.create<AccountEntity>(
+      account as AccountEntity
+    );
   }
 
   async findAll(): Promise<AccountEntity[]> {
     return await this.accountRepository.findAll();
   }
 
-  async findOneById(id: number): Promise<AccountEntity | null> {
+  public async findAccountById(id: number): Promise<AccountEntity | null> {
     return await this.accountRepository.findOne<AccountEntity>({
-      where: {
-        id,
-      },
+      where: { id },
     });
   }
 
-  async findOneByUsername(username: string): Promise<AccountEntity | null> {
+  public async findAccountByEmail(
+    email: string
+  ): Promise<AccountEntity | null> {
     return await this.accountRepository.findOne<AccountEntity>({
-      where: {
-        username,
-      },
+      where: { email },
+    });
+  }
+
+  public async findAccountByUsername(
+    username: string
+  ): Promise<AccountEntity | null> {
+    return await this.accountRepository.findOne<AccountEntity>({
+      where: { username },
     });
   }
 
   async update(
     id: number,
-    updates: { [key: string]: any }
-  ): Promise<{ affectedCount: number; updatedAccount: AccountEntity }> {
+    updates: PartialAccountDTO
+  ): Promise<{ affectedCount: number; updatedAccount: AccountDTO }> {
     const [affectedCount, [updatedAccount]] =
       await this.accountRepository.update(
         { ...updates },
@@ -49,7 +61,13 @@ export class AccountsService {
     return { affectedCount, updatedAccount };
   }
 
-  async delete(id: number) {
+  async delete(id: number): Promise<number> {
     return await this.accountRepository.destroy({ where: { id } });
+  }
+
+  private async findAccounts(
+    where: QueryAccount
+  ): Promise<AccountEntity | null> {
+    return await this.accountRepository.findOne<AccountEntity>(where);
   }
 }
