@@ -18,6 +18,7 @@ const roles = [
 
 interface AccountAttributes {
   id: number;
+  email: string;
   username: string;
   password: string;
   role: AccountRole;
@@ -44,6 +45,11 @@ export const attributes = {
     unique: true,
     primaryKey: true,
     autoIncrement: true,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
   },
   username: {
     type: DataTypes.STRING,

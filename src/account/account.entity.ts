@@ -9,21 +9,24 @@ import {
 
 @Table({ tableName })
 export class AccountEntity extends Model<AccountInstance> {
-  @Column({ ...attributes.id })
+  @Column(attributes.id)
   id: number;
 
-  @Column({ ...attributes.username })
+  @Column(attributes.email)
+  email: string;
+
+  @Column(attributes.username)
   username: string;
 
-  @Column({ ...attributes.password })
+  @Column(attributes.password)
   password: string;
 
-  @Column({ ...attributes.role })
+  @Column(attributes.role)
   role: AccountRole;
 
-  @Column({ ...attributes.createdAt })
+  @Column(attributes.createdAt)
   createdAt: Date;
 
-  @Column({ ...attributes.updatedAt })
+  @Column(attributes.updatedAt)
   updatedAt: Date;
 }

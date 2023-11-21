@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import { AccountEntity } from 'src/account/account.entity';
-import { ProvideToken } from 'src/shared/constants';
+import { AccountEntity } from '../../account/account.entity';
+import { ProvideToken } from '../../shared/constants';
 
 const tables = [
   AccountEntity,

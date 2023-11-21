@@ -1,7 +1,7 @@
 import { AccountEntity } from './account.entity';
 import { AccountsService } from './accounts.service';
 import { AccountRole } from '../core/db/models/account.model';
-import { AccountDto } from './dto/account.dto';
+import { LoginDTO } from './interfaces/account.dto';
 
 describe('AccountsService', () => {
   let accountsService: AccountsService;
@@ -36,8 +36,9 @@ describe('AccountsService', () => {
   });
 
   describe('findOneById', () => {
-    it('should return an account if it exists in the database', async () => {
+    it('should return an account if account with such id exists in the database', async () => {
       const account = accounts[0];
+      const argument = { where: { id: account.id } };
       const promise: Promise<any> = new Promise((resolve) => {
         resolve(account);
       });
@@ -45,16 +46,31 @@ describe('AccountsService', () => {
       jest.spyOn(AccountEntity, 'findOne').mockReturnValue(promise);
       const result = await accountsService.findOneById(account.id);
 
-      expect(AccountEntity.findOne).toHaveBeenCalledWith({
-        where: { id: account.id },
+      expect(AccountEntity.findOne).toHaveBeenCalledWith(argument);
+      expect(result).toBe(account);
+    });
+  });
+
+  describe('findOneByEmail', () => {
+    it('should return an account if account with such email exists in the database', async () => {
+      const account = accounts[0];
+      const argument = { where: { email: account.email } };
+      const promise: Promise<any> = new Promise((resolve) => {
+        resolve(account);
       });
+
+      jest.spyOn(AccountEntity, 'findOne').mockReturnValue(promise);
+      const result = await accountsService.findOneByEmail(account.email);
+
+      expect(AccountEntity.findOne).toHaveBeenCalledWith(argument);
       expect(result).toBe(account);
     });
   });
 
   describe('findOneByUsername', () => {
-    it('should return an account if it exists in the database', async () => {
-      const [account] = accounts;
+    it('should return an account if account with such username exists in the database', async () => {
+      const account = accounts[0];
+      const argument = { where: { username: account.username } };
       const promise: Promise<any> = new Promise((resolve) => {
         resolve(account);
       });
@@ -62,9 +78,23 @@ describe('AccountsService', () => {
       jest.spyOn(AccountEntity, 'findOne').mockReturnValue(promise);
       const result = await accountsService.findOneByUsername(account.username);
 
-      expect(AccountEntity.findOne).toHaveBeenCalledWith({
-        where: { username: account.username },
+      expect(AccountEntity.findOne).toHaveBeenCalledWith(argument);
+      expect(result).toBe(account);
+    });
+  });
+
+  describe('findMany', () => {
+    it('should return accounts of a given criteria if they are in the database', async () => {
+      const account = accounts[0];
+      const argument = { where: account };
+      const promise: Promise<any> = new Promise((resolve) => {
+        resolve(account);
       });
+
+      jest.spyOn(AccountEntity, 'findOne').mockReturnValue(promise);
+      const result = await accountsService['findMany'](argument);
+
+      expect(AccountEntity.findOne).toHaveBeenCalledWith(argument);
       expect(result).toBe(account);
     });
   });
@@ -73,6 +103,7 @@ describe('AccountsService', () => {
     it('should create a new account when the request body has all the valid properties', async () => {
       const newAccount = {
         username: 'username2',
+        email: 'username2@email.com',
         password: 'password2',
         role: AccountRole.USER,
       };
@@ -87,7 +118,7 @@ describe('AccountsService', () => {
           });
         });
 
-      await accountsService.create(newAccount as AccountDto);
+      await accountsService.create(newAccount as LoginDTO);
 
       expect(AccountEntity.create).toHaveBeenCalledWith(newAccount);
     });
@@ -117,14 +148,14 @@ describe('AccountsService', () => {
     });
   });
 
-  describe('delete', () => {
+  describe('deleteOne', () => {
     it('should delete an account when the request body provide a valid id', async () => {
       const id = 1;
       jest.spyOn(AccountEntity, 'destroy').mockImplementation((where: any) => {
         return new Promise((resolve) => resolve(where));
       });
 
-      await accountsService.delete(id);
+      await accountsService.deleteOne(id);
 
       expect(AccountEntity.destroy).toHaveBeenCalledWith({ where: { id } });
     });
