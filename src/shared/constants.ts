@@ -21,6 +21,16 @@ export const length = {
   max: 255, // in bytes which roughly equals to 255 chars without a good text compression algorithm.
 };
 
+export const invalid = {
+  password: /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/,
+};
+
+export const valid = {
+  username: /^[a-z][-a-z0-9_]*\$?$/,
+  email:
+    /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+};
+
 export enum ProvideToken {
   SEQUELIZE = 'SEQUELIZE',
   ACCOUNTS_REPOSITORY = 'ACCOUNTS_REPOSITORY',
