@@ -13,13 +13,13 @@ describe('ValidateRegisterPipe', () => {
   const metadata = true as any;
 
   describe('isValid', () => {
-    it('must validate whether request object has all the expected traits / properties', () => {
+    it('must must return true if object has all the required properties', () => {
       const result = validateRegisterPipe['isValid'](register);
 
       expect(result).toBe(true);
     });
 
-    it('must validate whether request object has all the expected traits / properties', () => {
+    it('must return false if object does not have all the required properties', () => {
       const result = validateRegisterPipe['isValid'](login);
 
       expect(result).toBe(false);
@@ -72,7 +72,7 @@ describe('ValidateRegisterPipe', () => {
       }
     });
 
-    it('should throw BadRequestException when username is too short', () => {
+    it('should throw BadRequestException when username has invalid character', () => {
       const value = { ...register, username: 'username&' };
       try {
         validateRegisterPipe.transform(value, metadata);
@@ -81,7 +81,7 @@ describe('ValidateRegisterPipe', () => {
       }
     });
 
-    it('should throw BadRequestException when username is too short', () => {
+    it('should throw BadRequestException when password is too short', () => {
       const value = { ...register, password: 'oof' };
       try {
         validateRegisterPipe.transform(value, metadata);
