@@ -76,6 +76,7 @@ jobs:
           DB_PROD_NAME: 'database'
           DB_TEST_NAME: 'database'
           DB_DEV_NAME: 'database'
+          JWT_KEY: 'jwtKey'
         run: npm run test:cov
 
       - name: Running ng lint
